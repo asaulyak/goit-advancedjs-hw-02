@@ -3,6 +3,11 @@ import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 
+// Описаний в документації
+import iziToast from 'izitoast';
+// Додатковий імпорт стилів
+import 'izitoast/dist/css/iziToast.min.css';
+
 const END_DATE_KEY = 'time';
 
 function initDatePicker() {
@@ -32,7 +37,11 @@ function validateEndTime(endTime) {
   const startButton = document.querySelector('[data-start]');
 
   if (Date.now() >= endTime) {
-    alert('Please choose a date in the future');
+    iziToast.show({
+      message: 'Please choose a date in the future',
+      color: 'red',
+      position: 'topRight'
+    });
     return false;
   }
 
