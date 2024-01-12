@@ -15,6 +15,7 @@ function bindEvents() {
   let switcherId = null;
 
   startButton.addEventListener('click', () => {
+    switchColor();
     switcherId = startSwitcher();
     startButton.disabled = true;
   });
@@ -26,9 +27,11 @@ function bindEvents() {
 }
 
 function startSwitcher() {
-  return setInterval(() => {
-    document.body.style.backgroundColor = getRandomHexColor();
-  }, 1000);
+  return setInterval(switchColor, 1000);
+}
+
+function switchColor() {
+  document.body.style.backgroundColor = getRandomHexColor();
 }
 
 function stopSwitcher(intervalId) {
