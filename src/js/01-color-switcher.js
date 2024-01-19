@@ -14,15 +14,19 @@ function bindEvents() {
 
   let switcherId = null;
 
+  stopButton.disabled = true;
+
   startButton.addEventListener('click', () => {
     switchColor();
     switcherId = startSwitcher();
     startButton.disabled = true;
+    stopButton.disabled = false;
   });
 
   stopButton.addEventListener('click', () => {
     stopSwitcher(switcherId);
     startButton.disabled = false;
+    stopButton.disabled = true;
   });
 }
 
