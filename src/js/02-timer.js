@@ -71,6 +71,10 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
+
 function bindEvents() {
   initDatePicker();
 
@@ -111,15 +115,19 @@ function startCountDown(endTime) {
 
     const { days, hours, minutes, seconds } = convertMs(diff);
 
-    daysField.textContent = days;
-    hoursField.textContent = hours;
-    minutesField.textContent = minutes;
-    secondsField.textContent = seconds;
+    if ([days, hours, minutes, seconds].every(item => item === 0)) {
+      clearInterval(interval);
+    }
+
+    daysField.textContent = addLeadingZero(days);
+    hoursField.textContent = addLeadingZero(hours);
+    minutesField.textContent = addLeadingZero(minutes);
+    secondsField.textContent = addLeadingZero(seconds);
   };
 
   run();
 
-  setInterval(run, 1000);
+  const interval = setInterval(run, 1000);
 }
 
 bindEvents();
