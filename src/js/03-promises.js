@@ -37,6 +37,8 @@ function bindEvents() {
     const { delay, step, amount } = Object.fromEntries(formData);
 
     createPromises(+delay, +step, +amount);
+
+    form.reset();
   });
 }
 
@@ -45,14 +47,14 @@ async function createPromises(firstDelay, stepDelay, amount) {
     createPromise(index, firstDelay + index * stepDelay)
       .then(({ position, delay }) => {
         iziToast.show({
-          message: `✅ Fulfilled promise ${position} in ${delay}ms`,
+          message: `✅ Fulfilled promise ${position + 1} in ${delay}ms`,
           color: 'green',
           position: 'topRight',
         });
       })
       .catch(({ position, delay }) => {
         iziToast.show({
-          message: `❌ Rejected promise ${position} in ${delay}ms`,
+          message: `❌ Rejected promise ${position + 1} in ${delay}ms`,
           color: 'red',
           position: 'topRight',
         });
